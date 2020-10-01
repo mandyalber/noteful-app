@@ -1,0 +1,12 @@
+.note {
+    border: 1px solid black;
+    padding: 5px 10px 15px 15px;
+}
+
+.note a {
+    text-decoration: none;
+}
+
+.note a:hover {
+    color: blue;
+}

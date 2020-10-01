@@ -1,0 +1,23 @@
+.noteful-nav {
+    margin-top: 125px;
+    grid-area: sidebar;
+    height: 100vh;
+    overflow: auto;
+  
+}
+.noteful-nav li {
+    border: 1px solid black;
+    list-style: none;
+    padding: 15px;
+    margin: 15px;    
+}
+
+.noteful-nav a {
+    text-decoration: none;
+}
+
+.active li {
+    background-color: darkslateblue;
+    color: white;
+}
+
