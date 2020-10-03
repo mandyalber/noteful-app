@@ -1,7 +1,8 @@
 import React from 'react';
-import './NoteMain.css'
+import './NoteDetails.css'
 import Note from './Note';
 
+// export default function NoteMain( {note = {content = ''}}) {
 export default function NoteMain(props) {
 
     return (
@@ -18,8 +19,8 @@ export default function NoteMain(props) {
 
     )
 
-    //note
-    //note content
+  
+
 
     //add note button
 

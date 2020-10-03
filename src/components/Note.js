@@ -27,4 +27,24 @@ export default function Note(props) {
     //date modified      
     //delete button
 
+    
+    /* Implement the delete button on the note page, if the delete is successful, redirect to the / path.
+
+    Implement the delete button for each note in the list in the main route and folder route. 
+    
+    To delete notes, make a DELETE request to the /notes/<note-id> endpoint.
+
+    You can implement the DELETE request in the component that owns the delete button, and then use a callback context value to update the state in your top level component.
+    
+    After making a successful DELETE request, you can use a this.state.notes.filter method along with setState to remove a note from state and update context.To add the content type header in fetch requests you can pass in an "init" object with settings. Here's an example for a DELETE request:
+
+    fetch(`http://localhost:1234/foo/${fooId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+
+    */
+
 }

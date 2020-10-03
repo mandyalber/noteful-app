@@ -21,3 +21,6 @@ export default function NoteListMain(props) {
     //add note button
 
 }
+NoteListMain.defaultProps = {
+    notes: []
+  }
