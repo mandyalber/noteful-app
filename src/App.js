@@ -76,10 +76,3 @@ class App extends React.Component {
 
 export default App;
 
-/*Requirements
-    Refactor your Noteful application to use context instead of prop-drilling.
-
-    You'll be able to swap the render props in your Route components for component props as the nested components can read the values from context directly.
-
-    You may need to swap some function components for class components so that you can read context (or use Context.Consumer components with render props).
-*/
