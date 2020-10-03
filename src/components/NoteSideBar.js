@@ -1,13 +1,25 @@
 import React from 'react';
-import './NoteSideBar.css'
+import NotesContext from './NotesContext';
+import './NoteSideBar.css';
 
-export default function NoteSideBar({folder = false, history}) {
+//this component renders the folder for the current note and a back button
+export default function NoteSideBar({ folder = false, history, match }) {
     return (
-        <div className="note-sidebar">
-            {folder &&(<p className="selected-folder">{folder.name}</p>)}
-            <button className="back-button"
-                onClick={()=>history.goBack()}>Go Back
-            </button>
-        </div>
+        <NotesContext.Consumer>
+            {(value) => {
+                const { notes, folders } = value
+                const { noteId } = match.params;
+                const note = notes.find(note => note.id === noteId) || {}
+                const folder = folders.find(folder => folder.id === note.folderId) || {}
+                return (
+                    <div className="note-sidebar">
+                        <p className="selected-folder">{folder.name}</p>
+                        <button className="back-button"
+                            onClick={() => history.goBack()}>Go Back
+                    </button>
+                    </div>
+                )
+            }}
+        </NotesContext.Consumer>
     )
 }

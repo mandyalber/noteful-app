@@ -1,25 +1,31 @@
 import React from 'react';
 import './NoteDetails.css'
 import Note from './Note';
+import NotesContext from './NotesContext';
 
-// export default function NoteMain( {note = {content = ''}}) {
-export default function NoteMain(props) {
-
+//this component renders the current note and that note's content
+export default function NoteMain({ match }) {
     return (
-        <section className="note-main">
-            <Note
-                id={props.note.id}
-                name={props.note.name}
-                modified={props.note.modified}
-            />
-            <div className="note-content">
-                {props.note.content}
-            </div>
-        </section>
-
+        <NotesContext.Consumer>
+            {(value) => {
+                const notes = value.notes
+                const { noteId } = match.params;
+                const note = notes.find(note => note.id === noteId) || {}
+                return (
+                    <section className="note-main">
+                        <Note
+                            id={note.id}
+                            name={note.name}
+                            modified={note.modified}
+                        />
+                        <div className="note-content">
+                            {note.content}
+                        </div>
+                    </section>
+                )
+            }}
+        </NotesContext.Consumer>
     )
-
-  
 
 
     //add note button
@@ -27,6 +33,6 @@ export default function NoteMain(props) {
 }
 NoteMain.defaultProps = {
     note: {
-      content: '',
+        content: '',
     }
-  }
+}

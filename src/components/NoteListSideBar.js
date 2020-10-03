@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import NotesContext from './NotesContext';
 import './NoteListSideBar.css';
 
+//this component renders the list of available folders as nav bar
 export default function NoteListSideBar(props) {
     return (
         <NotesContext.Consumer>

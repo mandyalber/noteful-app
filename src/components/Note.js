@@ -1,22 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-
 import './Note.css'
 
+//this component renders note title as link, modified date and delete note button
 export default function Note(props) {
+    const { name, id, modified } = props
     return (
+
         <div className="note">
             <h2 className='note-title'>
-                <Link to={`/note/${props.id}`}>
-                    {props.name}
+                <Link to={`/note/${id}`}>
+                    {name}
                 </Link>
             </h2>
 
             <div className='note-modified'>
                 Modified on {' '}
                 <span className='date'>
-                {props.modified}
+                    {modified}
                 </span>
 
             </div>
@@ -27,7 +28,7 @@ export default function Note(props) {
     //date modified      
     //delete button
 
-    
+
     /* Implement the delete button on the note page, if the delete is successful, redirect to the / path.
 
     Implement the delete button for each note in the list in the main route and folder route. 

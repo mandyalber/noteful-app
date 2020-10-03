@@ -36,38 +36,21 @@ class App extends React.Component {
   }
 
   renderSideBarRoute() {
-
+    return (
+      <>
+        <Route exact path='/' component={NoteListSideBar} />
+        <Route path='/folder/:folderId' component={NoteListSideBar} />
+        <Route path='/note/:noteId' component={NoteSideBar} />
+      </>
+    )
   }
 
   renderMainRoute() {
-    const { notes } = this.state
     return (
       <>
-        <Route
-          exact path='/'
-          render={routeProps => {
-            const { folderId } = routeProps.match.params
-            const folderNotes = (!folderId) ? notes : notes.filter(note => note.folderId === folderId)
-            return <NoteListMain {...routeProps} notes={folderNotes} />
-          }}
-        />
-        <Route
-          exact path='/folder/:folderId'
-          render={routeProps => {
-            const { folderId } = routeProps.match.params
-            const folderNotes = (!folderId) ? notes : notes.filter(note => note.folderId === folderId)
-            return <NoteListMain {...routeProps} notes={folderNotes} />
-          }}
-        />
-        <Route />
-        <Route
-          path='/note/:noteId'
-          render={routeProps => {
-            const { noteId } = routeProps.match.params;
-            const note = notes.find(note => note.id === noteId)
-            return <NoteDetails {...routeProps} note={note} />
-          }}
-        />
+        <Route exact path='/' component={NoteListMain} />
+        <Route exact path='/folder/:folderId' component={NoteListMain} />
+        <Route path='/note/:noteId' component={NoteDetails} />
       </>
     )
   }
@@ -80,11 +63,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <NotesContext.Provider value={contextValue}>
-          <nav className="noteful-nav">
-            <Route exact path='/' component={NoteListSideBar} />
-            <Route path='/folder/:folderId' component={NoteListSideBar} />
-            <Route path='/note/:noteId' component={NoteSideBar} />
-          </nav>
+          <nav className="noteful-nav">{this.renderSideBarRoute()}</nav>
           <header className="noteful-header">
             <h1><Link to='/'>Noteful</Link></h1>
           </header>
