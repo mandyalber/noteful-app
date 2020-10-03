@@ -16,6 +16,15 @@ class App extends React.Component {
     folders: []
   }
 
+  deleteNote = noteId => {
+    const newNotes = this.state.notes.filter(note =>
+      note.id !== noteId
+    )
+    this.setState({
+      notes: newNotes
+    })
+  }
+
   componentDidMount() {
     Promise.all([
       fetch('http://localhost:9090/folders'),
@@ -59,6 +68,7 @@ class App extends React.Component {
     const contextValue = {
       notes: this.state.notes,
       folders: this.state.folders,
+      deleteNote: this.deleteNote,
     }
     return (
       <div className="App">

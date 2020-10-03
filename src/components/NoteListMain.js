@@ -5,7 +5,6 @@ import './NoteListMain.css'
 
 //this component renders a list of notes and can be filtered based on selected folder
 export default function NoteListMain({ match }) {
-
     return (
         <NotesContext.Consumer>
             {(value) => {
@@ -17,7 +16,8 @@ export default function NoteListMain({ match }) {
                         {folderNotes.map((note, i) =>
                             <li key={i}><Note id={note.id}
                                 name={note.name}
-                                modified={note.modified} /></li>
+                                modified={note.modified} />
+                            </li>
                         )}
                     </ul>
                 )
@@ -26,7 +26,4 @@ export default function NoteListMain({ match }) {
     )
     //add note button
 
-}
-NoteListMain.defaultProps = {
-    notes: []
 }
