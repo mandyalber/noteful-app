@@ -43,3 +43,6 @@ NoteMain.defaultProps = {
         content: '',
     }
 }
+/*Requirements
+  Review each of the components that you have built so far for this project. Any component that receives props from its parent should be refactored to define PropType validation.
+*/

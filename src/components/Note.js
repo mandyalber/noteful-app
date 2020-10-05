@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Note.css'
 import NotesContext from './NotesContext';
+import { format } from 'date-fns';
 
 function deleteNoteRequest(noteId, callback, onDeleteNote) {
     fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -40,7 +41,7 @@ export default function Note(props) {
             <div className='note-modified'>
                 Modified on {' '}
                 <span className='date'>
-                    {modified}
+                {format(new Date(modified), 'MM/dd/yyyy')}
                 </span>
             </div>
             <NotesContext.Consumer>
@@ -63,3 +64,6 @@ export default function Note(props) {
 Note.defaultProps = {
     onClickDelete: () => { },
   }
+  /*Requirements
+  Review each of the components that you have built so far for this project. Any component that receives props from its parent should be refactored to define PropType validation.
+*/

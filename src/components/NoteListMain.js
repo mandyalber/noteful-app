@@ -14,9 +14,11 @@ export default function NoteListMain({ match }) {
                 return (
                     <ul className="notes-list">
                         {folderNotes.map((note, i) =>
-                            <li key={i}><Note id={note.id}
-                                name={note.name}
-                                modified={note.modified} />
+                            <li key={i}>
+                                <Note id={note.id}
+                                    name={note.name}
+                                    modified={note.modified} 
+                                />
                             </li>
                         )}
                     </ul>
@@ -27,3 +29,6 @@ export default function NoteListMain({ match }) {
     //add note button
 
 }
+/*Requirements
+  Review each of the components that you have built so far for this project. Any component that receives props from its parent should be refactored to define PropType validation.
+*/

@@ -21,3 +21,9 @@
     color: white;
 }
 
+.noteful-nav button {
+    float: right;
+    padding: 15px;
+    margin: 15px; 
+}
+
