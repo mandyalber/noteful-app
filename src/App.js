@@ -10,28 +10,6 @@ import AddFolder from './components/AddFolder';
 import AddNote from './components/AddNote';
 import ErrorBoundary from './components/ErrorBoundary';
 
-/**
- * What to test for:
- * 
- * User Stories
- * User should be able to create a note
- * User should be able to create a folder
- * 
- * Edge Case
- * What happens when a user creates a note without having created a folder?
- * What happens when a user deletes a note and you are on a note view?
- * If you can delete a folder what happens to all the notes in that folder?
- * What happens when I create a note that has a duplicate title?
- * 
- * 
- cntx.Provider
-cntx.Consumer
-
-const ctx = useContext(cntx)
-ctx.prop
- */
-
-
 class App extends React.Component {
 
   state = {
@@ -40,9 +18,8 @@ class App extends React.Component {
   }
 
   deleteNote = noteId => {
-    const newNotes = this.state.notes.filter(note =>
-      note.id !== noteId)
-    this.setState({
+    const newNotes = this.state.notes.filter(note => note.id !== noteId)
+    this.setState({ 
       notes: newNotes
     })
   }
@@ -55,8 +32,8 @@ class App extends React.Component {
   addNote = (note) => {
     this.setState({
       notes: [...this.state.notes, note],
-    });
-  };
+    })
+  }
 
   componentDidMount() {
     Promise.all([
@@ -121,12 +98,8 @@ class App extends React.Component {
           </ErrorBoundary>
         </NotesContext.Provider>
       </div>
-    );
+    )
   }
 }
 
 export default App;
-
-/*Requirements
-  Review each of the components that you have built so far for this project. Any component that receives props from its parent should be refactored to define PropType validation.
-*/

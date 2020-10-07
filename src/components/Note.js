@@ -12,21 +12,22 @@ function deleteNoteRequest(noteId, callback, onDeleteNote) {
             'content-type': 'application/json'
         }
     })
-        .then(res => {
-            if (!res.ok) {
-                return res.json().then(error => {
-                    throw error
-                })
-            }
-            return res.json()
-        })
-        .then(data => {
-            onDeleteNote(noteId)
-            callback(noteId)
-        })
-        .catch(error => {
-            console.error(error)
-        })
+    .then(res => {
+        if (!res.ok) {
+            return res.json().then(error => {
+                throw error
+            })
+        }
+        console.log(res.json())
+        return res.json()
+    })
+    .then(data => {
+        onDeleteNote(noteId)
+        callback(noteId)
+    })
+    .catch(error => {
+        console.error(error)
+    })
 }
 
 //this component renders note title as link, modified date and delete note button
@@ -62,9 +63,10 @@ export default function Note(props) {
         </div >
     )
 }
+
 Note.propTypes = {
     onDeleteNote: PropTypes.func,
     id: PropTypes.string,
     name: PropTypes.string,
     modified: PropTypes.string,
-  };
+  }

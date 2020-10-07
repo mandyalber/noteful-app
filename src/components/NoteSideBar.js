@@ -28,4 +28,4 @@ export default function NoteSideBar({ folder = false, history, match }) {
 NoteSideBar.propTypes = {
     history: PropTypes.object,
     match: PropTypes.object,
-  };
+}

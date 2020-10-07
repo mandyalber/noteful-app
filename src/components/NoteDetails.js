@@ -15,8 +15,7 @@ export default function NoteDetails({ match, history }) {
             {(value) => {
                 const notes = value.notes
                 const { noteId } = match.params;
-                const note = notes.find(note => note.id === noteId) || {}
-                
+                const note = notes.find(note => note.id === noteId) || {}                
                 return (
                     <section className="note-main">
                         <Note
@@ -38,4 +37,4 @@ export default function NoteDetails({ match, history }) {
 NoteDetails.propTypes = {
     history: PropTypes.object,
     match: PropTypes.object,
-};
+}

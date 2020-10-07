@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 //renders form that adds new folder to folder array
 export default function AddFolder({ history }) {
 
-
     function handleNewFolderSubmit(event, addFolder) {
         event.preventDefault()
         const name = event.target.name.value;
@@ -44,9 +43,8 @@ export default function AddFolder({ history }) {
             ...newFolder,
             name: input.trim(),
             touched: true
-        })
-        
-    };
+        })        
+    }
 
     const validateFolder = () => {
         if (newFolder.name.length <= 3) {            
@@ -56,8 +54,7 @@ export default function AddFolder({ history }) {
 
     return (
         <NotesContext.Consumer>
-            {(context) => (
-    
+            {(context) => (    
                 <form onSubmit={(e) => handleNewFolderSubmit(e, context.addFolder)}>
                     <h2>Create a New Folder </h2>
                     <label htmlFor="new-folder-name">
@@ -78,8 +75,8 @@ export default function AddFolder({ history }) {
             )}
         </NotesContext.Consumer>
     )
-
 }
+
 AddFolder.propTypes = {
     history: PropTypes.any
   }

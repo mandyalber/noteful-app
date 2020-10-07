@@ -40,4 +40,4 @@ export default function NoteListMain({ match }) {
 
 NoteListMain.propTypes = {
     match: PropTypes.object,
-};
+}

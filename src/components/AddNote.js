@@ -12,8 +12,7 @@ export default function AddNote(props) {
             content: e.target.content.value,
             folderId: e.target.folderId.value,
             modified: new Date(),
-        }
-        //note.modified = new Date(note.modified)
+        }       
 
         fetch('http://localhost:9090/notes', {
             method: "POST",
@@ -22,19 +21,19 @@ export default function AddNote(props) {
             },
             body: JSON.stringify(note),
         })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(error => {
-                        throw error
-                    })
-                }
-                return response.json()
-            })
-            .then(responseJson => {
-                addNote(responseJson)
-                props.history.push("/")
-            })
-            .catch((error) => console.log(error))
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    throw error
+                })
+            }
+            return response.json()
+        })
+        .then(responseJson => {
+            addNote(responseJson)
+            props.history.push("/")
+        })
+        .catch((error) => console.log(error))
     }
 
     const [newNote, setNewNote] = useState({
@@ -107,21 +106,19 @@ export default function AddNote(props) {
                         </form>
                     </div>
                 )
-
             }}
         </NotesContext.Consumer>
-
-    );
+    )
 }
 
 AddNote.propTypes = {
     name: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     folderId: PropTypes.string.isRequired,
-};
+}
 
 AddNote.defaultProps = {
     name: "",
     content: "",
     folderId: "",
-};
+}
