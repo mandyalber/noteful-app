@@ -1,10 +1,9 @@
 .noteful-nav {
     margin-top: 125px;
     grid-area: sidebar;
-    height: 100vh;
-    overflow: auto;
-  
+    overflow: hidden;  
 }
+
 .noteful-nav li {
     border: 1px solid black;
     list-style: none;
@@ -25,5 +24,10 @@
     float: right;
     padding: 15px;
     margin: 15px; 
+    border-radius: 5px;
 }
 
+.noteful-nav button:hover {
+    background-color: darkslateblue;
+    color: white;
+}

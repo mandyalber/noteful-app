@@ -1,6 +1,7 @@
 import React from 'react';
 import NotesContext from './NotesContext';
 import './NoteSideBar.css';
+import PropTypes from 'prop-types';
 
 //this component renders the folder for the current note and a back button
 export default function NoteSideBar({ folder = false, history, match }) {
@@ -23,6 +24,8 @@ export default function NoteSideBar({ folder = false, history, match }) {
         </NotesContext.Consumer>
     )
 }
-/*Requirements
-  Review each of the components that you have built so far for this project. Any component that receives props from its parent should be refactored to define PropType validation.
-*/
+
+NoteSideBar.propTypes = {
+    history: PropTypes.object,
+    match: PropTypes.object,
+  };

@@ -13,3 +13,32 @@
      margin: 15px;
      flex: 1;
  }
+
+button {
+    padding: 10px;
+    margin: 15px; 
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: darkslateblue;
+    color: white;
+}
+
+button.add-note  {
+    float: right;
+}
+
+form {
+    margin: 30px;
+} 
+
+input {    
+    margin-bottom: 15px;
+}
+
+.validate {
+    font-size: 14px;
+    color: red;
+}
+

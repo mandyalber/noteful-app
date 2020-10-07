@@ -1,19 +1,15 @@
-import React from 'react';
-import './AddFolder.css'
+import React, { useState } from 'react';
 import NotesContext from './NotesContext';
+import PropTypes from 'prop-types';
 
-
-
-
+//renders form that adds new folder to folder array
 export default function AddFolder({ history }) {
-
 
 
     function handleNewFolderSubmit(event, addFolder) {
         event.preventDefault()
         const name = event.target.name.value;
-        console.log(event, name)
-        //api POST call
+
         fetch(`http://localhost:9090/folders/`, {
             method: 'POST',
             headers: {
@@ -21,38 +17,69 @@ export default function AddFolder({ history }) {
             },
             body: JSON.stringify({ name })
         })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(error => {
-                        throw error
-                    })
-                }
-                return response.json()
-            })
-            .then(responseJson => {
-                addFolder(responseJson)
-                history.push(`/`)
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    throw error
+                })
+            }
+            return response.json()
+        })
+        .then(responseJson => {
+            addFolder(responseJson)
+            history.push(`/`)
+        })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
+    const [newFolder, setNewFolder] = useState({
+        name: '',
+        touched: false
+    })
 
+    const updateFolderName = (input) => {
+        setNewFolder({ 
+            ...newFolder,
+            name: input.trim(),
+            touched: true
+        })
+        
+    };
+
+    const validateFolder = () => {
+        if (newFolder.name.length <= 3) {            
+            return "Name must be at least 4 characters";
+        }
+    }
 
     return (
         <NotesContext.Consumer>
             {(context) => (
+    
                 <form onSubmit={(e) => handleNewFolderSubmit(e, context.addFolder)}>
-                    <label htmlFor="new-folder-name">Enter new folder name: </label>
-                    <input type="text" id="new-folder-name" name="name" required></input>
-                    <button type="submit">Submit</button>
+                    <h2>Create a New Folder </h2>
+                    <label htmlFor="new-folder-name">
+                        Enter new folder name:{' '}   
+                    </label>
+                    <input
+                        type="text"
+                        id="new-folder-name"
+                        name="name"
+                        onChange={(e) => updateFolderName(e.target.value)}
+                        required
+                    />
+                    <br/><p className="validate">{newFolder.touched && (validateFolder())}</p>
+                    <button type="submit"disabled={validateFolder()}>
+                        Submit
+                    </button>
                 </form>
             )}
         </NotesContext.Consumer>
     )
-        
+
 }
-
-
-/*Create a new component AddFolder that implements a form to capture the name of a new folder from the user. This form should submit the name of the new folder to the POST /folders endpoint on the server. Ensure that any errors are properly handled. Add a button to the navigation to invoke the new form.*/
+AddFolder.propTypes = {
+    history: PropTypes.any
+  }

@@ -12,4 +12,9 @@
 
 .noteful-header {
     grid-area: header;
+    text-align: center;
+}
+
+.noteful-header a {
+    text-decoration: none;
 }

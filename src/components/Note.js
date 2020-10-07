@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Note.css'
 import NotesContext from './NotesContext';
 import { format } from 'date-fns';
+import PropTypes from 'prop-types';
 
 function deleteNoteRequest(noteId, callback, onDeleteNote) {
     fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -61,9 +62,9 @@ export default function Note(props) {
         </div >
     )
 }
-Note.defaultProps = {
-    onClickDelete: () => { },
-  }
-  /*Requirements
-  Review each of the components that you have built so far for this project. Any component that receives props from its parent should be refactored to define PropType validation.
-*/
+Note.propTypes = {
+    onDeleteNote: PropTypes.func,
+    id: PropTypes.string,
+    name: PropTypes.string,
+    modified: PropTypes.string,
+  };

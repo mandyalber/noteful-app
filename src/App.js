@@ -7,10 +7,32 @@ import NoteSideBar from './components/NoteSideBar';
 import NotesContext from './components/NotesContext';
 import './App.css'
 import AddFolder from './components/AddFolder';
+import AddNote from './components/AddNote';
+import ErrorBoundary from './components/ErrorBoundary';
+
+/**
+ * What to test for:
+ * 
+ * User Stories
+ * User should be able to create a note
+ * User should be able to create a folder
+ * 
+ * Edge Case
+ * What happens when a user creates a note without having created a folder?
+ * What happens when a user deletes a note and you are on a note view?
+ * If you can delete a folder what happens to all the notes in that folder?
+ * What happens when I create a note that has a duplicate title?
+ * 
+ * 
+ cntx.Provider
+cntx.Consumer
+
+const ctx = useContext(cntx)
+ctx.prop
+ */
 
 
 class App extends React.Component {
-
 
   state = {
     notes: [],
@@ -19,17 +41,22 @@ class App extends React.Component {
 
   deleteNote = noteId => {
     const newNotes = this.state.notes.filter(note =>
-      note.id !== noteId
-    )
+      note.id !== noteId)
     this.setState({
       notes: newNotes
     })
   }
   addFolder = (folderName) => {
-    
-
-    this.setState({ folders: [...this.state.folders, folderName], })
+    this.setState({
+      folders: [...this.state.folders, folderName],
+    })
   }
+
+  addNote = (note) => {
+    this.setState({
+      notes: [...this.state.notes, note],
+    });
+  };
 
   componentDidMount() {
     Promise.all([
@@ -46,7 +73,7 @@ class App extends React.Component {
         console.log(notesResponse, foldersResponse)
         return Promise.all([foldersResponse.json(), notesResponse.json()])
       })
-      .then(([folders, notes]) => this.setState({ folders, notes }) || console.log(folders, notes))
+      .then(([folders, notes]) => this.setState({ folders, notes })) 
       .catch(error => this.setState({ error }))
   }
 
@@ -57,6 +84,7 @@ class App extends React.Component {
         <Route path='/folder/:folderId' component={NoteListSideBar} />
         <Route path='/note/:noteId' component={NoteSideBar} />
         <Route path='/add-folder' component={NoteSideBar} />
+        <Route path='/add-note' component={NoteSideBar} />
       </>
     )
   }
@@ -68,6 +96,7 @@ class App extends React.Component {
         <Route exact path='/folder/:folderId' component={NoteListMain} />
         <Route path='/note/:noteId' component={NoteDetails} />
         <Route path='/add-folder' component={AddFolder} />
+        <Route path='/add-note' component={AddNote} />
       </>
     )
   }
@@ -78,15 +107,18 @@ class App extends React.Component {
       folders: this.state.folders,
       deleteNote: this.deleteNote,
       addFolder: this.addFolder,
+      addNote: this.addNote
     }
     return (
       <div className="App">
         <NotesContext.Provider value={contextValue}>
-          <nav className="noteful-nav">{this.renderSideBarRoute()}</nav>
-          <header className="noteful-header">
-            <h1><Link to='/'>Noteful</Link></h1>
-          </header>
-          <main className="noteful-main">{this.renderMainRoute()}</main>
+          <ErrorBoundary>
+            <nav className="noteful-nav">{this.renderSideBarRoute()}</nav>
+            <header className="noteful-header">
+              <h1><Link to='/'>Noteful</Link></h1>
+            </header>
+            <main className="noteful-main">{this.renderMainRoute()}</main>
+          </ErrorBoundary>
         </NotesContext.Provider>
       </div>
     );
