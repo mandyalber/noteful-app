@@ -14,7 +14,7 @@ export default function AddNote(props) {
             modified: new Date(),
         }       
 
-        fetch('http://localhost:9090/notes', {
+        fetch('http://localhost:9090/api/notes', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -81,6 +81,7 @@ export default function AddNote(props) {
                             <br/>{newNote.touched && (<p className="validate">{validateName()}</p>)}
                             <label htmlFor="content">Content: </label><br/>          
                             <input
+                                id="content"
                                 name="content"
                                 type="textarea"
                                 placeholder="content"

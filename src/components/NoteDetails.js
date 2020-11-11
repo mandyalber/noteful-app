@@ -5,24 +5,20 @@ import NotesContext from './NotesContext';
 import PropTypes from 'prop-types';
 
 //this component renders the current note and that note's content
-export default function NoteDetails({ match, history }) {   
-    
-    function handleDeleteNote (noteId) {
-       history.push(`/`)
-    }
+export default function NoteDetails({ match }) {   
+
     return (
         <NotesContext.Consumer>
-            {(value) => {
-                const notes = value.notes
+            {(context) => {
+                const notes = context.notes
                 const { noteId } = match.params;
-                const note = notes.find(note => note.id === noteId) || {}                
+                const note = notes.find(note => note.id === parseInt(noteId)) || {}                
                 return (
                     <section className="note-main">
                         <Note
                             id={note.id}
                             name={note.name}
-                            modified={note.modified}
-                            onDeleteNote={handleDeleteNote}
+                            modified={note.modified}                            
                         />
                         <div className="note-content">
                             {note.content}
@@ -35,6 +31,5 @@ export default function NoteDetails({ match, history }) {
 }
 
 NoteDetails.propTypes = {
-    history: PropTypes.object,
     match: PropTypes.object,
 }

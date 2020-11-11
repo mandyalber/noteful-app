@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 export default function NoteListMain({ match }) {
     return (
         <NotesContext.Consumer>
-            {(value) => {
-                const notes = value.notes
+            {(context) => {
+                const notes = context.notes
                 const { folderId } = match.params
-                const folderNotes = (!folderId) ? notes : notes.filter(note => note.folderId === folderId)
+                const folderNotes = (!folderId) ? notes : notes.filter(note => note.folderId === parseInt(folderId))
 
                 if (notes.length) {
                     return (
@@ -33,6 +33,7 @@ export default function NoteListMain({ match }) {
                         </>
                     )
                 }
+                return <Link to="/add-note"><button id="add-note" className="add-note">Add Note</button></Link>
             }}
         </NotesContext.Consumer>
     )

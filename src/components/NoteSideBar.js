@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 export default function NoteSideBar({ folder = false, history, match }) {
     return (
         <NotesContext.Consumer>
-            {(value) => {
-                const { notes, folders } = value
+            {(context) => {
+                const { notes, folders } = context
                 const { noteId } = match.params;
                 const note = notes.find(note => note.id === noteId) || {}
                 const folder = folders.find(folder => folder.id === note.folderId) || {}

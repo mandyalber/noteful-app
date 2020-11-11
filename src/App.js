@@ -18,11 +18,21 @@ class App extends React.Component {
   }
 
   deleteNote = noteId => {
-    const newNotes = this.state.notes.filter(note => note.id !== noteId)
-    this.setState({ 
-      notes: newNotes
+    fetch(`http://localhost:9090/api/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      }
     })
-  }
+      .then(() => {
+        this.componentDidMount()
+        window.location.href = "/"
+      })
+      .catch(error => {
+        console.error(error)
+      })
+    }
+
   addFolder = (folderName) => {
     this.setState({
       folders: [...this.state.folders, folderName],
@@ -37,8 +47,8 @@ class App extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('http://localhost:9090/folders'),
-      fetch('http://localhost:9090/notes')
+      fetch('http://localhost:9090/api/folders'),
+      fetch('http://localhost:9090/api/notes')
     ])
       .then(([foldersResponse, notesResponse]) => {
         if (!foldersResponse.ok) {
@@ -50,7 +60,7 @@ class App extends React.Component {
         console.log(notesResponse, foldersResponse)
         return Promise.all([foldersResponse.json(), notesResponse.json()])
       })
-      .then(([folders, notes]) => this.setState({ folders, notes })) 
+      .then(([folders, notes]) => this.setState({ folders, notes }))
       .catch(error => this.setState({ error }))
   }
 

@@ -13,9 +13,14 @@ export default function NoteListSideBar(props) {
                         <div className="sidebar">
                             <ul className="folder-list">
                                 {context.folders.map((folder) => (
-                                    <NavLink to={`/folder/${folder.id}`} key={folder.id}>
-                                        <li>{folder.name}</li>
-                                    </NavLink>
+                                    <li key={folder.id}>
+                                        <NavLink to={`/folder/${folder.id}`} >
+                                        <div className="folder">
+                                            {folder.name}
+                                            </div>
+                                        </NavLink>
+                                        
+                                    </li>
                                 ))}
                             </ul>
                             <Link to='/add-folder'>

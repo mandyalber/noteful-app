@@ -1,34 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Note.css'
+import './Note.css';
+import moment from 'moment';
 import NotesContext from './NotesContext';
-import { format } from 'date-fns';
 import PropTypes from 'prop-types';
-
-function deleteNoteRequest(noteId, callback, onDeleteNote) {
-    fetch(`http://localhost:9090/notes/${noteId}`, {
-        method: 'DELETE',
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-    .then(res => {
-        if (!res.ok) {
-            return res.json().then(error => {
-                throw error
-            })
-        }
-        console.log(res.json())
-        return res.json()
-    })
-    .then(data => {
-        onDeleteNote(noteId)
-        callback(noteId)
-    })
-    .catch(error => {
-        console.error(error)
-    })
-}
 
 //this component renders note title as link, modified date and delete note button
 export default function Note(props) {
@@ -43,21 +18,12 @@ export default function Note(props) {
             <div className='note-modified'>
                 Modified on {' '}
                 <span className='date'>
-                {format(new Date(modified), 'MM/dd/yyyy')}
+                    {moment(modified).format("MMM Do YYYY")}
                 </span>
             </div>
             <NotesContext.Consumer>
                 {(context) => (
-                    <button
-                        onClick={() => {
-                            deleteNoteRequest(
-                                props.id,
-                                context.deleteNote,
-                                props.onDeleteNote
-                            )
-                        }}
-                    >Delete
-                    </button>
+                    <button onClick={() => { context.deleteNote(props.id)}}>Delete</button>
                 )}
             </NotesContext.Consumer>
         </div >
@@ -65,8 +31,7 @@ export default function Note(props) {
 }
 
 Note.propTypes = {
-    onDeleteNote: PropTypes.func,
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     modified: PropTypes.string,
-  }
+}

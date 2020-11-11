@@ -9,7 +9,7 @@ export default function AddFolder({ history }) {
         event.preventDefault()
         const name = event.target.name.value;
 
-        fetch(`http://localhost:9090/folders/`, {
+        fetch(`http://localhost:9090/api/folders/`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
