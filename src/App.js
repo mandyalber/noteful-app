@@ -6,6 +6,7 @@ import NoteDetails from './components/NoteDetails';
 import NoteSideBar from './components/NoteSideBar';
 import NotesContext from './components/NotesContext';
 import './App.css'
+import config from './config';
 import AddFolder from './components/AddFolder';
 import AddNote from './components/AddNote';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -18,7 +19,7 @@ class App extends React.Component {
   }
 
   deleteNote = noteId => {
-    fetch(`http://localhost:9090/api/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -47,8 +48,8 @@ class App extends React.Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('http://localhost:9090/api/folders'),
-      fetch('http://localhost:9090/api/notes')
+      fetch(`${config.API_ENDPOINT}/api/folders`),
+      fetch(`${config.API_ENDPOINT}/api/notes`)
     ])
       .then(([foldersResponse, notesResponse]) => {
         if (!foldersResponse.ok) {
