@@ -58,7 +58,7 @@ class App extends React.Component {
         if (!notesResponse.ok) {
           throw new Error(notesResponse.status)
         }
-        console.log(notesResponse, foldersResponse)
+        
         return Promise.all([foldersResponse.json(), notesResponse.json()])
       })
       .then(([folders, notes]) => this.setState({ folders, notes }))

@@ -14,7 +14,7 @@ export default function AddNote(props) {
             modified: new Date(),
         }       
 
-        fetch('http://localhost:9090/api/notes', {
+        fetch(`${config.API_ENDPOINT}/api/notes`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
