@@ -29,6 +29,7 @@ export default function NoteListSideBar(props) {
                         </div>
                     )
                 }
+                return <Link to='/add-folder'><button >Add New Folder</button></Link>
             }}
         </NotesContext.Consumer>
     )
