@@ -4,7 +4,7 @@ import './NoteSideBar.css';
 import PropTypes from 'prop-types';
 
 //this component renders the folder for the current note and a back button
-export default function NoteSideBar({ folder = false, history, match }) {
+export default function NoteSideBar({ history, match }) {
     return (
         <NotesContext.Consumer>
             {(context) => {
