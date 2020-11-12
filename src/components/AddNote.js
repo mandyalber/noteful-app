@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NotesContext from "./NotesContext";
 import PropTypes from "prop-types";
+import config from './config';
 
 
 export default function AddNote(props) {
