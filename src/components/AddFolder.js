@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NotesContext from './NotesContext';
 import PropTypes from 'prop-types';
-import config from './config';
+import config from '../config';
 
 //renders form that adds new folder to folder array
 export default function AddFolder({ history }) {
