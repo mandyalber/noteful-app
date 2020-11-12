@@ -10,7 +10,7 @@ export default function NoteSideBar({ folder = false, history, match }) {
             {(context) => {
                 const { notes, folders } = context
                 const { noteId } = match.params;
-                const note = notes.find(note => note.id === noteId) || {}
+                const note = notes.find(note => note.id === parseInt(noteId)) || {}
                 const folder = folders.find(folder => folder.id === note.folderId) || {}
                 return (
                     <div className="note-sidebar">
